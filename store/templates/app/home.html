@@ -1,0 +1,43 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block title %} HOME {% endblock %}
+
+
+{% block content %}
+
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="h1 fw-">
+                Search, Read, Buy, Review
+            </h1>
+            <p class="lead text-muted"> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam dicta repellat maiores excepturi, cum provident distinctio nobis quam aperiam hic blanditiis nisi? Nemo illo nesciunt, cupiditate eum provident dicta quisquam.</p>
+            <a href="" class="btn btn-primary my-2">Make an account</a>
+
+        </div>
+    </div>
+     
+    <section class="productsall">
+        <div class="container">
+        <div class="pb-3 h2 d-flex">All Products</div>   
+
+            <div class="row">
+
+                {% for product in products%}
+                <div class="col-md-3 mt-3">
+                    <div class="card card-product-grid">
+                        <img class="img-wrap"  src="{{ product.image.url }}" alt="responsive img">
+                        <figcaption class="info-wrap">
+                            <a href="{% url 'product_detail' product.slug%}">{{ product.title }}</a>
+                            <div class="price mt-1">{{ product.price }}</div>
+                        </figcaption>                
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

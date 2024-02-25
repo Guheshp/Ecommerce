@@ -1,0 +1,25 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block content %}
+    <section class="productsall">
+        <div class="container">
+    <div class="pb-3 h2 d-flex">{{category.name | title}}</div>    
+
+            <div class="row">
+                {% for product in products%}
+                <div class="col-md-3 mt-3">
+                    <div class="card ">
+                        <img class="img-wrap"  src="{{ product.image.url }}" alt="responsive img">
+                        <figcaption class="info-wrap">
+                            <a href="{% url 'product_detail' product.slug %}">{{ product.title }}</a>
+                            <div class="price mt-1">{{ product.price }}</div>
+                        </figcaption>                
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </section>
+{% endblock %}
