@@ -3,37 +3,6 @@
 {% load static%}
 
 {% block content %}
-<!-- <h1>store</h1> -->
-<!--Main Navigation-->
-
-
-    
-          <!-- Left elements -->
-  
-          <!-- Center elements -->
-          <!-- <div class="order-lg-last col-lg-5 col-sm-8 col-8">
-            <div class="d-flex float-end">
-              <a href="https://github.com/mdbootstrap/bootstrap-material-design" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center" target="_blank">
-                <i class="fas fa-user-alt m-1 me-md-2"></i>
-                <p class="d-none d-md-block mb-0">Sign in</p>
-              </a>
-              <a href="https://github.com/mdbootstrap/bootstrap-material-design" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center" target="_blank">
-                <i class="fas fa-heart m-1 me-md-2"></i>
-                <p class="d-none d-md-block mb-0">Wishlist</p>
-              </a>
-              <a href="https://github.com/mdbootstrap/bootstrap-material-design" class="border rounded py-1 px-3 nav-link d-flex align-items-center" target="_blank">
-                <i class="fas fa-shopping-cart m-1 me-md-2"></i>
-                <p class="d-none d-md-block mb-0">My cart</p>
-              </a>
-            </div>
-          </div> -->
-          <!-- Center elements -->
-  
-        
-    <!-- Jumbotron -->
-  
-    
-  
   <!-- sidebar + content -->
   <section class="">
     <div class="container">
@@ -210,8 +179,9 @@
                                     <span class="price">{{ product.category }}</span>
                                 </div>
                             </div>
-                            <a href="#!" class="btn btn-primary shadow-0 me-1">Add to cart</a>
-                        </figcaption>
+                            <a href="{% url 'product_detail' product.slug%}" class="btn btn-primary shadow-0 me-1">View Details</a>
+
+                          </figcaption>
                     </figure>
                 </div>
                 {% endfor %}
@@ -222,23 +192,45 @@
   
           <!-- Pagination -->
         <nav aria-label="Page navigation example" class="d-flex justify-content-center mt-3">
-            <ul class="pagination">
-              <li class="page-item disabled">
-                <a class="page-link" href="#" aria-label="Previous">
+          {% if products.has_other_pages %}
+
+          <ul class="pagination">
+
+            {% if products.has_previous %}
+              <li class="page-item ">
+                <a class="page-link" href="?page={{products.previous_page_number}}" aria-label="Previous">
                   <span aria-hidden="true">&laquo;</span>
+                  {% else %}
+
+                <a class="page-link disabled" href="#" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                  {% endif %}
                 </a>
               </li>
-              <li class="page-item active"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">4</a></li>
-              <li class="page-item"><a class="page-link" href="#">5</a></li>
+              {% for i in products.paginator.page_range %}
+                {% if products.number == i %}
+                  <li class="page-item active"><a class="page-link" href="#">{{i}}</a></li>
+                  {% else %}
+                  <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+                {% endif %}
+              {% endfor %}
+
+              {% if products.has_next %}
               <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
+                <a class="page-link" href="?page={{products.next_page_number}}" aria-label="Next">
                   <span aria-hidden="true">&raquo;</span>
                 </a>
               </li>
+              {% else %}
+              <li class="page-item">
+                <a class="page-link disabled" href="#" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            {% endif %}
+
             </ul>
+            {% endif %}
         </nav>
           <!-- Pagination -->
         </div>

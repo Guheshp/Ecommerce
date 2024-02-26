@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #ourapps
     'store',
+    'cart',
 ]
 
 MIDDLEWARE = [
@@ -66,6 +67,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'store.views.categories', #we can access categories in all templates
+                'cart.context_proccess.counter', 
             ],
         },
     },

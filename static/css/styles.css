@@ -10,3 +10,19 @@
     box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.3);
     transform: scale(1.02);
 }
+
+.widget-header {
+    /* Ensure relative positioning for absolute positioning of the badge */
+    position: relative;
+}
+
+.notify {
+
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.icon-lg {
+    /* Increase the font size of the icon */
+    font-size: 24px; /* Adjust the size as needed */
+}

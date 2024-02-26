@@ -1,0 +1,124 @@
+{% extends 'app/base.html'%}
+
+{% block content %}
+
+<section class="bg-light">
+    <div class="container">
+        <div class="row">
+            <!-- cart -->
+            <div class="col-lg-9">
+                <!-- Start of table for cart items -->
+                {% if not cart_items%}
+               <h2 class="text-center mt-3">Your Shopping cart is empty!</h2>
+                <div class="text-center mt-4">
+                <a href="{% url 'my-store' %}" class="btn btn-outline-primary">Continue Shopping</a>
+              </div>
+                {% else %}
+                <a href="{{ request.META.HTTP_REFERER }}"><i class="fa-solid fa-arrow-left"></i>go back</a>
+                <h4 class="card-title p-4">Your shopping cart</h4>
+                <div class="card border shadow-0">
+                    <div class="card-body">
+                        <table class="table border">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Subtotal</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Start of for loop to populate cart items -->
+                                {% for cart_item in cart_items %}
+                                <tr>
+                                    <td>
+                                        <div class="d-flex">
+                                            <img src="{{cart_item.product.image.url}}" class="border rounded me-3" style="width: 96px; height: 96px;" />
+                                            <div class="">
+                                                <a href="{% url 'product_detail' cart_item.product.slug %}" class="nav-link">{{cart_item.product.title}}</a>
+                                                <p class="text-muted">Yellow, Jeans</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><i class="fa-solid fa-indian-rupee-sign"></i>&nbsp;{{ cart_item.product.price|floatformat:2 }}
+                                      <small class="text-muted"> / per item</small>
+
+                                    </td>
+                                    <td>
+                                      <div class="input-group" style="width: 160px;">
+                                        <a href="{% url 'remove_cart' cart_item.product.id%}" class="btn btn-white border border-secondary px-3" type="button" id="button-addon1" data-mdb-ripple-color="dark">
+                                            <i class="fas fa-minus"></i>
+                                        </a>
+                                        <input type="text" class="form-control text-center border border-secondary" value="{{ cart_item.quantity }}" aria-label="Example text with button addon" aria-describedby="button-addon1" />
+                                        <a href="{% url 'add_cart' cart_item.product.id%}" class="btn btn-white border border-secondary px-3" type="button" id="button-addon2" data-mdb-ripple-color="dark">
+                                            <i class="fas fa-plus"></i>
+                                        </a>
+                                    </div>
+                                    </td>
+                                    <td><i class="fa-solid fa-indian-rupee-sign"></i>&nbsp;{{ cart_item.sub_total|floatformat:2 }}</td>
+                                    <td>
+                                        <a href="#!" class="btn btn-light border px-2 icon-hover-primary"><i class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
+                                        <a href="{% url 'remove_cart_item' cart_item.product.id%}" class="btn btn-light border text-danger icon-hover-danger">Remove</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                <!-- End of for loop -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- End of table for cart items -->
+                {% endif %}
+            </div>
+            <!-- cart -->
+
+              <!-- summary -->
+              <div class="col-lg-3 py-">
+                <div class="card mb-3 border shadow-0 ">
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group">
+                                <label class="form-label">Have coupon?</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control border" name="" placeholder="Coupon code" />
+                                    <button class="btn btn-light border">Apply</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="card shadow-0 border">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <p class="mb-2">Total price:</p>
+                            <p class="mb-2"><i class="fa-solid fa-indian-rupee-sign"></i> {{total|floatformat:2}} </p>
+
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <p class="mb-2">Discount:</p>
+                            <p class="mb-2 text-success">-<i class="fa-solid fa-indian-rupee-sign"></i> 60.00</p>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <p class="mb-2">TAX:</p>
+                            <p class="mb-2"><i class="fa-solid fa-indian-rupee-sign"></i> {{tax|floatformat:2}}</p>
+                        </div>
+                        <hr />
+                        <div class="d-flex justify-content-between">
+                            <p class="mb-2">Grand Total:</p>
+                            <p class="mb-2 fw-bold"><i class="fa-solid fa-indian-rupee-sign"></i> {{grand_total|floatformat:2}}</p>
+                        </div>
+
+                        <div class="mt-3">
+                            <a href="#" class="btn btn-success w-100 shadow-0 mb-2"> Make Purchase </a>
+                            <a href="{% url 'my-store' %}" class="btn btn-light w-100 border mt-2">Continue Shipping</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- summary -->
+        </div>
+    </div>
+</section>
+
+{% endblock %}
