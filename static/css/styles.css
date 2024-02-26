@@ -1,8 +1,12 @@
 .productsall img{
-    height: 22rem;
+    height: 20rem;
+    width:100%;
+}
+.card-product-grid:hover{
+    transition: transform 0.5s ease;
+    box-shadow: 0.5s ease;
 }
 .card-product-grid:hover {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6), 0 1px 3px rgba(0, 0, 0, 0.8);
-    transition: box-shadow 0.3s ease;
-    /* cursor: pointer; */
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.3);
+    transform: scale(1.02);
 }

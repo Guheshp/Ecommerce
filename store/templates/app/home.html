@@ -20,14 +20,21 @@
      
     <section class="productsall">
         <div class="container">
-        <div class="pb-3 h2 d-flex">All Products</div>   
+        
+
+        <div class="section-heading d-flex justify-content-md-between">
+            <h3 class="section-title">Popular products</h3>
+            <a href="{% url 'my-store'%}" class="btn btn-outline-primary">See All</a>
+        </div>   
 
             <div class="row">
 
                 {% for product in products%}
                 <div class="col-md-3 mt-3">
                     <div class="card card-product-grid">
-                        <img class="img-wrap"  src="{{ product.image.url }}" alt="responsive img">
+                        <a href="{% url 'product_detail' product.slug %}">
+                            <img class="rounded-1" src="{{ product.image.url }}" alt="responsive img">
+                        </a>
                         <figcaption class="info-wrap">
                             <a href="{% url 'product_detail' product.slug%}">{{ product.title }}</a>
                             <div class="price mt-1">{{ product.price }}</div>
