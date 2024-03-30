@@ -14,6 +14,7 @@ def _cart_id(request):
     return cart
 
 def add_cart(request, product_id):
+    url = request.META.get("HTTP_REFERER")
     product = Product.objects.get(id=product_id)
 
     try:
@@ -35,7 +36,7 @@ def add_cart(request, product_id):
             quantity=1,
         )
         cart_item.save()
-    return redirect('cart')
+    return redirect(url)
 
 
 def cart(request, total=0, quantity=0, cart_item=None):

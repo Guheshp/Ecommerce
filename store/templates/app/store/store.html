@@ -164,8 +164,13 @@
             <header class="border-bottom mb-4 pb-3">
                 <span class="d-block py-2"> <b>{{ product_count }}</b> Items found</span>
             </header>
-        
+            {% if 'search' in request.path%}
+            <h3>Search Result</h3>
+            {%else%}
+            <h3>Our stores</h3>
+            {%endif%}
             <div class="row productsall">
+              {% if search %}
                 {% for product in products %}
                 <div class="col-lg-4">
                     <figure class="card card-product-grid">
@@ -185,6 +190,9 @@
                     </figure>
                 </div>
                 {% endfor %}
+                {%else%}
+                <h3>No result found, please try later.</h3>
+                {%endif%}
             </div>
         </div>
         

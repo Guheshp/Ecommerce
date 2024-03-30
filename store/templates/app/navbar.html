@@ -24,22 +24,28 @@
       </li>
 
       <li><a href="{% url 'my-store' %}" class="nav-link px-2">Store</a></li>
-      <li><a href="#" class="nav-link px-2">Pricing</a></li>
-      <li><a href="#" class="nav-link px-2">FAQs</a></li>
-      <li><a href="#" class="nav-link px-2">About</a></li>
-    </ul>
-
-    <div class="col-md-2 text-center">
-      <small class="m-0 text-center me-2"> wellcome guest</small><br>
-      <a type="button" class=" me-2">Login</a>|
-      <a type="button" class="">Register</a>
+      <div class="search">
+        <form action="{% url 'search'%}" method="GET">
+            <input class="rounded mt-1 ml-3" type="text" placeholder="Search" name="keyword">
+            <button class="" type="submit">
+                <i class="fa fa-search" style="font-size: px;"></i>
+            </button>
+        </form>
     </div>
-
-    <a href="{% url 'cart'%}" class="widget-header pl-3 ml-3 position-relative">
-      <div class="icon icon-lg rounded-circle border"><i class="fa-solid fa-cart-shopping"></i></div>
-      <span class="badge badge-pill badge-danger notify position-absolute top-0 end-0">{{cart_count}}</span>
+  </ul>
+  
+  <div class="col-md-2 text-center">
+    <small class="m-0 text-center me-2"> wellcome guest</small><br>
+    <a type="button" href="{% url 'login'%}" class=" me-2 link-offset-2 link-underline link-underline-opacity-10">Login</a>|
+    <a type="button" href="{% url 'register'%}" class="link-offset-2 link-underline link-underline-opacity-10">Register</a>
+  </div>
+  
+  <a href="{% url 'cart'%}" class="widget-header pl-3 ml-3 position-relative">
+    <div class="icon icon-lg rounded-circle border"><i class="fa-solid fa-cart-shopping"></i></div>
+    <span class="badge badge-pill badge-danger notify position-absolute top-0 end-0">{{cart_count}}</span>
   </a>
-  </header>
+</div>
+</header>
 </div>
 
 

@@ -1,0 +1,99 @@
+{% extends 'app/base.html'%}
+
+{% block content %}
+
+<body>
+    
+<section>
+
+<div class="py-5">
+
+        <div class="d-flex justify-content-center align-items-center">
+            <div class="card p-4">
+              <!-- {% include 'acc/alert.html' %} -->
+                <form action="" method="post">
+                  {% if form.errors %}
+                  <div class="alert alert-danger" role="alert">
+                      <strong>errors:</strong><br>
+                      {% for field, errors in form.errors.items %}
+                          <strong>{{ field|title }}:</strong><br>
+                          {% for error in errors %}
+                              {{ error }}<br>
+                          {% endfor %}
+                      {% endfor %}
+                  </div>
+              {% endif %}
+                    <h3 class="py-2">Signup</h3>
+                    {% csrf_token %}
+                    <!-- {{form}} -->
+
+                    <div class="mt-2">
+                      <label for="inputEmail4" class="form-label text-dark">Email</label>
+                      <input type="email" name="email" autofocus class="form-control border-dark " placeholder="Email" id="inputEmail4" value="{{ form.data.email }}" required>
+                      <p class="small text-body-secondary">We'll never share your email with anyone</p>
+                  </div>
+    
+
+                  <div class="row g-3">
+
+                      <div class="col-sm-6">
+                        <label for="">First Name</label>
+                        <input type="text" name="first_name" class="form-control border-dark" placeholder="First name" value="{{ form.data.first_name }}"  required>
+                      </div>
+
+                      <div class="col-sm-6">
+                        <label for="">Last Name</label>
+                      <input type="text" class="form-control border-dark" name="last_name" placeholder="Last name" value="{{ form.data.last_name }}" required>
+                    </div>
+                </div>
+
+                <div class="row g-3 mt-1">
+<!-- 
+                  <div class="col-sm-6">
+                    <label for="inputEmail4" class="form-label">Username</label>
+                      <input type="text" name="username"  class="form-control border-dark" placeholder="Username" value="{{ form.data.username }}" required>
+    
+                  </div> -->
+    
+                  <div class="col-sm-6">
+                    <label for="inputEmail4" class="form-label">Phone Number</label>
+                    <input type="text" name="phone_number"  class="form-control border-dark" placeholder="Enter Your Phone Number" value="{{ form.data.phone_number }}" required>
+
+                  </div> 
+                  
+                </div> 
+    
+            <div class="row g-3 mt-1">
+
+              <div class="col-sm-6">
+                  <label for="">Password</label>
+                  <input type="password" name="password1" class="form-control border-dark" autocomplete="new-password" placeholder="Enter Password" required aria-describedby="id_password1_helptext" id="id_password1">
+
+              </div>
+
+              <div class="col-sm-6">
+                  <label for="">Confirm Password</label>
+                  <input type="password" name="password2" class="form-control border-dark" autocomplete="new-password" placeholder="Confirm Password" required aria-describedby="id_password2_helptext" id="id_password2">
+              </div> 
+
+            </div> 
+
+                    <button class="btn btn-primary w-100 mt-2"  type="submit">Register</button>
+                </form>
+                
+            </div>
+            
+            
+        </div>
+        <div class="d-flex justify-content-center ">
+        <p class="mt-1">Have an account? &nbsp; <a href="{% url 'login'%}">Login</a></p>
+    </div>
+    </div>
+
+</section>
+</body>
+
+
+{% endblock %}
+
+ 

@@ -10,6 +10,7 @@ urlpatterns = [
     path('product_detail/<slug:slug>/', views.product_detail, name='product_detail'),
     path('category_list/<slug:category_slug>/', views.category_list, name='category_list'),
     path('store/', views.store, name='my-store'),
+    path('search/', views.search, name='search'),
     
 
 ]
