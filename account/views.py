@@ -1,25 +1,13 @@
 from django.shortcuts import render, redirect
-from . forms import RegistrationForm
+
 from django.contrib import messages
-from django.contrib.auth import (authenticate,
-                                login as auth_login,
-                                logout as auth_logout,
-                                update_session_auth_hash,
-                                )
+
 
 # Create your views here.
 
 def register(request):
-    if request.method == 'POST':
-        form = RegistrationForm(request.POST)
-        if form.is_valid():
-            form.save() 
-            messages.success(request, 'Registration Completed!')
-            return redirect('login') 
-    else:
-        form = RegistrationForm()
-    context = {'form':form}
-    return render(request,'acc/register.html', context)
+    
+    return render(request,'acc/register.html')
 
 def login(request):  
     if request.method == 'POST':

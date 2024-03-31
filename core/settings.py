@@ -54,6 +54,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+AUTH_USER_MODEL = "account.MyAccount"
+
 ROOT_URLCONF = 'core.urls'
 
 TEMPLATES = [
